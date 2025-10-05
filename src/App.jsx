@@ -9,7 +9,7 @@ function App() {
   return (
     <>
       <Router>
-      <Navbar /> {/* Appears on all pages */}
+      <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
       </Routes>
