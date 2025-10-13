@@ -4,6 +4,7 @@ import './index.css'
 import Home from './pages/Home'
 import Navbar from './components/Navbar'
 import BrowseRecipes from './pages/BrowseRecipes'
+import RecipeDetails from './components/RecipeDetails'
 
 function App() {
 
@@ -13,7 +14,8 @@ function App() {
       <Navbar /> 
       <Routes>
           <Route path="/" element={<Home />} />
-          <Route path ="/recipes" element={<BrowseRecipes />} />
+          <Route path="/recipes" element={<BrowseRecipes />} />
+          <Route path ="/recipes/:id" element={<RecipeDetails />} />
       </Routes>
     </Router>
     </>

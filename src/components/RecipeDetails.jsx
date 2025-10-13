@@ -1,0 +1,68 @@
+import React, { useEffect, useState } from 'react'
+import { useParams, useNavigate } from 'react-router-dom'
+import { fetchRecipeById } from "../utils/api"
+ 
+function RecipeDetails(){
+  const { id } = useParams()
+  const navigate = useNavigate()
+  const [recipe, setRecipe] = useState(null)
+  const [loading, setloading] = useState(true)
+
+  useEffect(() => {
+    const loadRecipe = async () => {
+      try {
+        const data = await fetchRecipeById(id)
+        setRecipe(data)
+      } catch (error) {
+        console.error("Error laoding recipes:" , error)
+      } finally {
+        setloading(false)
+      }
+    }
+    loadRecipe()
+  }, [id])
+
+  if (loading) return <p>Loading recipe...</p>
+  if(!recipe) return <p>Recipe not Found</p>
+
+  return (
+    <div>
+      <button
+        onClick={() => navigate(-1)}
+        className="mb-6 flex items-center gap-2 text-[#278a1a] hover:text-[#38c425] transition"
+      >← Back </button>
+
+      <img src={recipe.image} alt={recipe.title} />
+      <h1>{recipe.title}</h1>
+
+      <div>
+        <span>🕛{recipe.readyInMinutes} mins</span>
+        <span>🍽️{recipe.servings}</span>
+        <span>💛Heath Score:{recipe.healthScore}</span>
+      </div>
+
+    <h2 className="text-2xl font-semibold mb-3">Ingredients</h2>
+      <ul className="list-disc ml-6 mb-8 text-gray-700">
+        {recipe.extendedIngredients?.map((ing) => (
+          <li key={ing.id}>{ing.original}</li>
+        ))}
+      </ul>
+
+      <h2 className="text-2xl font-semibold mb-3">Instructions</h2>
+      <p className="leading-relaxed text-gray-700 mb-10">
+        {recipe.instructions
+          ? recipe.instructions.replace(/<\/?[^>]+(>|$)/g, "")
+          : "No instructions available."}
+      </p>
+
+      <button
+        className="bg-[#278a1a] hover:bg-[#38c425] text-white px-6 py-3 rounded-lg transition"
+        onClick={() => console.log("Add to planner clicked!")}
+      >
+        Add to Planner
+      </button>
+    </div>
+  )
+}
+
+export default RecipeDetails;

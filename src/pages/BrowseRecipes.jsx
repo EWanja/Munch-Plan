@@ -1,13 +1,16 @@
-import React, { useState, useEffect } from "react";
-import { getRandomRecipes } from "../utils/api";
-import { getFilteredRecipes } from "../utils/api";
+import React, { useState, useEffect } from "react"
+import { Link } from "react-router-dom"
+import { getRandomRecipes } from "../utils/api"
+import { getFilteredRecipes } from "../utils/api"
+
 
 function BrowseRecipes() {
   const [recipes, setRecipes] = useState([])
   const [query, setQuery] = useState("")
   const [cuisine, setCuisine] = useState("")
   const [diet, setDiet] = useState("")
-   const [intolerance, setIntolerance] =useState("")
+  const [intolerance, setIntolerance] = useState("")
+  const [selectedRecipes, setselectedRecipes] = useState("")
 
   useEffect(() => {
     const loadRecipes = async () => {
@@ -15,7 +18,7 @@ function BrowseRecipes() {
       setRecipes(data)
     }
     loadRecipes()
-  }, []);
+  }, [])
 
   const handleSearch = async (e) => {
     e.preventDefault()
@@ -79,33 +82,39 @@ function BrowseRecipes() {
           </select>
 
           <button type ="submit" className="bg-[#278a1a] hover:bg-[#38c425] text-white font-semibold px-6 py-3 rounded-md transition duration-300'"> Search</button>
-
-
-
         </form>
         
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
         {recipes.map((recipe) => (
           <div
-            key={recipe.id}
-            className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition duration-300"
+            key={recipe.id} 
+            className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg cursor-pointer transition duration-300"
           >
             <img
               src={recipe.image}
               alt={recipe.title}
               className="w-full h-48 object-cover"
             />
-            <div className="p-4">
-              <h3 className="font-semibold text-lg">{recipe.title}</h3>
+            <h3 className="font-semibold text-lg">{recipe.title}</h3>
+
+            <div className="flex items-center justify-between">
               <p className="text-sm text-gray-600 mt-2">
                 Ready in {recipe.readyInMinutes} minutes | {recipe.servings} servings
               </p>
+              <div className="flex justify-end mt-auto px-4 mb-4">
+              <Link
+                to={`/recipe/${recipe.id}`}
+                className="bg-[#278a1a] hover:bg-[#38c425] text-white px-4 py-2 rounded-md text-sm text-center transition"
+              >
+                View
+                </Link>
+                </div>
             </div>
           </div>
         ))}
       </div>
     </div>
-  );
+  )
 } 
 
 

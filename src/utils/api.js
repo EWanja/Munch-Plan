@@ -38,5 +38,20 @@ const BASE_URL = 'https://api.spoonacular.com/recipes';
             console.error("Error fetching filtered recipes:", error);
             return [];
         }
-    };
+};
+    
+export const fetchRecipeById = async (id) => {
+  try {
+    const response = await axios.get(`${BASE_URL}/${id}/information`, {
+      params: {
+        apiKey: API_KEY,
+        includeNutrition: true, 
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching recipe details:", error);
+    throw error;
+  }
+};
 
