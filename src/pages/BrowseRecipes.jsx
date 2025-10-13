@@ -12,16 +12,28 @@ function BrowseRecipes() {
   useEffect(() => {
     const loadRecipes = async () => {
       const data = await getRandomRecipes();
-      setRecipes(data);
-    };
-    loadRecipes();
+      setRecipes(data)
+    }
+    loadRecipes()
   }, []);
+
+  const handleSearch = async (e) => {
+    e.preventDefault()
+    const data = await getFilteredRecipes({
+      query,
+      cuisine,
+      diet,
+      intolerances: intolerance,
+    })
+    setRecipes(data)
+  }
    
     return (
       <div className="px-6 py-10">
       <h2 className="text-3xl font-bold text-center mb-8">Browse Recipes</h2>
-        <form
-        className="flex flex-col md:flex-row items-center justify-center gap-4 mb-10 bg-white p-4 rounded-lg shadow-md"
+        
+        <form onSubmit={handleSearch}
+        className="flex flex-col md:flex-row items-center justify-center gap-4 mb-10 bg-[#f4f5f3] p-4 rounded-lg shadow-md"
       >
         <input
           type="text"
@@ -36,14 +48,42 @@ function BrowseRecipes() {
           className="border border-gray-300 px-4 py-2 rounded-md w-full md:w-1/5"
         >
           <option value="">Cuisine</option>
-          <option value="African">Italian</option>
+          <option value="African">African</option>
           <option value="Mexican">Mexican</option>
           <option value="Chinese">Chinese</option>
           <option value="Indian">Indian</option>
           <option value="American">French</option>
-          <option value="Italian">Chinese</option>
-        </select>
-          </form>
+          <option value="Italian">Italian</option>
+          </select>
+
+          <select
+          value={diet}
+          onChange={(e) => setDiet(e.target.value)}
+          className="border border-gray-300 px-4 py-2 rounded-md w-full md:w-1/5"
+        >
+          <option value="">Diet</option>
+          <option value="vegitarian">Vegitarian</option>
+          <option value="ketogenic">Keto</option>
+          <option value="gluten free">Gluten Free</option>
+          </select>
+
+          <select
+          value={intolerance}
+          onChange={(e) => setIntolerance(e.target.value)}
+          className="border border-gray-300 px-4 py-2 rounded-md w-full md:w-1/5"
+        >
+          <option value="">Intolerance</option>
+          <option value="dairy">Dairy</option>
+          <option value="eggs">Eggs</option>
+          <option value="gluten">Gluten</option>
+          </select>
+
+          <button type ="submit" className="bg-[#278a1a] hover:bg-[#38c425] text-white font-semibold px-6 py-3 rounded-md transition duration-300'"> Search</button>
+
+
+
+        </form>
+        
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
         {recipes.map((recipe) => (
           <div
