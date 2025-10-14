@@ -4,7 +4,7 @@ const API_KEY = import.meta.env.VITE_SPOONACULAR_API_KEY
 const BASE_URL = 'https://api.spoonacular.com/recipes';
 
 
-    export const getRandomRecipes = async (number = 20) => {
+    export const getRandomRecipes = async (number = 10) => {
         try {
             const res = await axios.get(`${BASE_URL}/random`, {
                 params: {

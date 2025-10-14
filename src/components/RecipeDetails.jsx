@@ -26,11 +26,23 @@ function RecipeDetails(){
   if(!recipe) return <p>Recipe not Found</p>
 
   return (
-    <div>
-      <button
-        onClick={() => navigate(-1)}
-        className="mb-6 flex items-center gap-2 text-[#278a1a] hover:text-[#38c425] transition"
-      >← Back </button>
+    <div className="max-w-4xl mx-auto p-6 bg-gradient-to-b from-[#f8fdf7] to-[#eafbea] min-h-screen">
+      
+      <div className="flex items-center justify-between mb-6">
+        <button
+          onClick={() => navigate(-1)}
+          className="flex items-center gap-2 text-[#278a1a] hover:text-[#38c425] transition font-medium"
+        >
+          ← Back
+        </button>
+  
+        <button
+        className="bg-[#278a1a] hover:bg-[#38c425] text-white px-6 py-3 rounded-lg transition"
+        onClick={() => console.log("Add to planner clicked!")}
+      >
+        Add to Planner
+      </button>
+      </div>
 
       <img src={recipe.image} alt={recipe.title} />
       <h1>{recipe.title}</h1>
@@ -55,12 +67,7 @@ function RecipeDetails(){
           : "No instructions available."}
       </p>
 
-      <button
-        className="bg-[#278a1a] hover:bg-[#38c425] text-white px-6 py-3 rounded-lg transition"
-        onClick={() => console.log("Add to planner clicked!")}
-      >
-        Add to Planner
-      </button>
+      
     </div>
   )
 }
