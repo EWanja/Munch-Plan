@@ -5,6 +5,7 @@ import Home from './pages/Home'
 import Navbar from './components/Navbar'
 import BrowseRecipes from './pages/BrowseRecipes'
 import RecipeDetails from './components/RecipeDetails'
+import MealPlanner from './pages/MealPlanner'
 
 function App() {
 
@@ -15,7 +16,8 @@ function App() {
       <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/recipes" element={<BrowseRecipes />} />
-          <Route path ="/recipe/:id" element={<RecipeDetails />} />
+          <Route path="/recipe/:id" element={<RecipeDetails />} />
+          <Route path="/planner" element={<MealPlanner />} />
       </Routes>
     </Router>
     </>
