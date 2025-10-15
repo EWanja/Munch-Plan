@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function AddToPlannerModal({ recipeTitle, onClose }) {
+function AddToPlannerModal({ recipeTitle, onClose, onSave }) {
     const [mealType, setMealType] = useState("")
     const [selectedDate, setSelectedDate] = useState("")
     const [notes, setNotes] = useState("")
@@ -25,20 +25,30 @@ function AddToPlannerModal({ recipeTitle, onClose }) {
             return
         }
 
+        const meal = {
+            title: recipeTitle,
+            mealType,
+            date: selectedDate,
+            notes,
+        }
+        onSave(meal)
+        onClose()
     }
+
+
 
     return (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
             <div className="bg-white rounded-xl p-6 w-96 shadow-lg relative">
-            <h3>Add to Meal Planner</h3>
+            <h3 className="text-lg font-semibold mb-4 text-center">Add to Meal Planner</h3>
 
-            <label>Title</label>
-            <input type="text" value={recipeTitle} readOnly placeholder="Enter meal Title" />
+            <label className="text-sm font-medium mb-1">Title</label>
+            <input type="text" value={recipeTitle} readOnly placeholder="Enter meal Title" className="w-full border rounded p-2 bg-gray-100" />
             
             {/* Meal type options*/}
-            <div>
-                <label> Meal Type</label>
-                <select value={mealType} onChange={(e) => setMealType(e.target.value)} >
+            <div className="mb-3">
+                <label className="text-sm font-medium mb-1"> Meal Type</label>
+                <select value={mealType} onChange={(e) => setMealType(e.target.value)} className="w-full border rounded-md p-2" >
                     <option>Breakfast</option>
                     <option>Lunch</option>
                     <option>Dinner</option>
@@ -46,10 +56,10 @@ function AddToPlannerModal({ recipeTitle, onClose }) {
             </div>
 
             {/* Date options*/}
-            <div>
-                <label>Select Date</label>
+            <div className="mb-3">
+                <label className="text-sm font-medium mb-1">Select Date</label>
                     <select value={selectedDate} onChange={(e) =>
-                        setSelectedDate(e.target.value)}>
+                        setSelectedDate(e.target.value)} className="w-full border rounded-md p-2">
                         <option value="">Choose Date</option>
                         {getCurrentMonthDates().map((date)=>(
                             <option key={date} value={date}>{date}</option>
@@ -58,17 +68,17 @@ function AddToPlannerModal({ recipeTitle, onClose }) {
             </div>
             
             {/* Add Note*/}
-            <div>
-                <label>Add A Note</label>
-                <textarea value={notes} onChange={(e) => setNotes(e.target.value)} placeholder="Add notes"></textarea>
+            <div className="mb-3">
+                <label className="text-sm font-mdeium mb-1">Add A Note</label>
+                <textarea value={notes} onChange={(e) => setNotes(e.target.value)} placeholder="Add notes" className="w-full border rounded-md p-2"></textarea>
             </div>
 
-            <div>
-                <button onClick={handleSave}>
+            <div className="flex justify-end gap-3 mt-4">
+                <button onClick={handleSave} className="bg-[#278a1a] hover:bg-[#38c425] text-white px-4 py-2 rounded-md">
                     Save Meal
                 </button>
 
-                    <button onClick={onClose}>
+                    <button onClick={onClose} className="bg-[#278a1a] hover:bg-[#38c425] text-white px-4 py-2 rounded-md">
                     Cancel
                     </button>
                 </div>
