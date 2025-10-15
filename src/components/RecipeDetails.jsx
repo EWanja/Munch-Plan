@@ -1,15 +1,18 @@
 import React, { useEffect, useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { fetchRecipeById } from "../utils/api"
+import AddToPlannerModal from './AddToPlannerModal'
  
 function RecipeDetails(){
   const { id } = useParams()
   const navigate = useNavigate()
   const [recipe, setRecipe] = useState(null)
   const [loading, setloading] = useState(true)
+  const[showModal, setShowModal] = useState(false)
 
   useEffect(() => {
     const loadRecipe = async () => {
+   
       try {
         const data = await fetchRecipeById(id)
         setRecipe(data)
@@ -36,12 +39,14 @@ function RecipeDetails(){
           ← Back
         </button>
   
-        <button
-        className="bg-[#278a1a] hover:bg-[#38c425] text-white px-6 py-3 rounded-lg transition"
-        onClick={() => console.log("Add to planner clicked!")}
+        <button onClick={() => setShowModal(true)}
+        className="bg-[#278a1a] hover:bg-[#38c425] text-white px-6 py-3 rounded-lg"
       >
         Add to Planner
-      </button>
+        </button>
+
+        {showModal && (<AddToPlannerModal recipeTitle={recipe.title} onClose={() => setShowModal(false)}/>
+        )}
       </div>
 
       <img src={recipe.image} alt={recipe.title} />
