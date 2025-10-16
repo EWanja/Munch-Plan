@@ -25,6 +25,19 @@ function RecipeDetails(){
     loadRecipe()
   }, [id])
 
+  const handleSaveMeal = (meal) => {
+    const existing = JSON.parse(localStorage.getItem("mealPlanner")) || {}
+    const { date, mealType } = meal
+    if (!existing[date]) existing[date] = {}
+    existing[date][mealType] = meal
+    
+    localStorage.setItem("mealPlanner", JSON.stringify(existing))
+    alert(`${meal.title} added to ${mealType} on ${date}`)
+  }
+
+
+
+
   if (loading) return <p>Loading recipe...</p>
   if(!recipe) return <p>Recipe not Found</p>
 
@@ -45,7 +58,7 @@ function RecipeDetails(){
         Add to Planner
         </button>
 
-        {showModal && (<AddToPlannerModal recipeTitle={recipe.title} onClose={() => setShowModal(false)}/>
+        {showModal && (<AddToPlannerModal recipeTitle={recipe.title} onClose={() => setShowModal(false)} onSave={handleSaveMeal}/>
         )}
       </div>
 
