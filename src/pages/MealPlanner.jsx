@@ -27,17 +27,17 @@ function MealPlanner() {
 
 
     return (
-        <div>
-            <h2>Meal Planner</h2>
+        <div className="p-6">
+            <h2 className="text-3xl font-bold text-center mb-4 gap-4">Meal Planner</h2>
 
-            <div className="">
-        <button onClick={() => changeMonth(-1)} className="">
+            <div className=" flex justify-center items-center mb-4 gap-4">
+        <button onClick={() => changeMonth(-1)} className="bg-gray-200 px-3 py-1 rounded-md">
           {"<"}
         </button>
-        <span className="">
+        <span className="font-semibold text-lg">
           {currentDate.toLocaleString("default", { month: "long" })} {year}
         </span>
-        <button onClick={() => changeMonth(1)} className="">
+        <button onClick={() => changeMonth(1)} className="bg-gray-200 px-3 py-1 rounded-md">
           {">"}</button>
             </div>
           <div className="grid grid-cols-7 gap-2">
@@ -48,10 +48,10 @@ function MealPlanner() {
             <div
               key={date}
               onClick={() => navigate(`/planner/${date}`)}
-              className=""
+              className=" border rounded-lg p-2 h-24 flex flex-col justify-between cursor-pointer hover:bg-[#b6eeaf] "
             >
-              <span className="">{i + 1}</span>
-              <p>
+              <span className="font-semibold">{i + 1}</span>
+              <p className="text-xs text:[#278a1a]">
                 {hasMeals ? "Meals Added" : "+"}
               </p>
             </div>
