@@ -41,25 +41,29 @@ function MealPlanner() {
           {">"}</button>
             </div>
           <div className="grid grid-cols-7 gap-2">
-        {Array.from({ length: daysInMonth }, (_, i) => {
-          const date = formatDate(i + 1);
-          const hasMeals = meals[date];
-          return (
-            <div
-              key={date}
-              onClick={() => navigate(`/planner/${date}`)}
-              className=" border rounded-lg p-2 h-24 flex flex-col justify-between cursor-pointer hover:bg-[#b6eeaf] "
-            >
-              <span className="font-semibold">{i + 1}</span>
-              <p className="text-xs text:[#278a1a]">
-                {hasMeals ? "Meals Added" : "+"}
-              </p>
-            </div>
-          );
-        })}
-            </div>
+          {Array.from({ length: daysInMonth }, (_, i) => {
+            const date = formatDate(i + 1);
+            const hasMeals = meals[date];
+            return (
+              <div
+                key={date}
+                onClick={() => navigate(`/planner/${date}`)}
+                className=" border rounded-lg p-2 h-24 flex flex-col justify-between cursor-pointer hover:bg-[#b6eeaf] "
+              >
+                <span className="font-semibold">{i + 1}</span>
+                {hasMeals ? (
+                  <p className="text-xs text:[#278a1a]">
+                    {Object.values(hasMeals)[0].title}
+                  </p>
+                ) : (
+                  <p className="text-xs text-gray-400"> + </p>
+                
+                )}
+              </div>
+            )
+          })}
         </div>
-         
+        </div>        
      )
 }
 
