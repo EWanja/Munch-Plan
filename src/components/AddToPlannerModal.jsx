@@ -25,13 +25,22 @@ function AddToPlannerModal({ recipeTitle, onClose, onSave }) {
             return
         }
 
-        const meal = {
+        const newMeal = {
             title: recipeTitle,
-            mealType,
-            date: selectedDate,
             notes,
         }
-        onSave(meal)
+
+        const storedPlanner = JSON.parse(localStorage.getItem("mealPlanner")) || {}
+
+        if (!storedPlanner[selectedDate] || typeof storedPlanner[selectedDate] !== "object") {
+            storedPlanner[selectedDate] = {}
+        }
+
+        storedPlanner[selectedDate][mealType] = newMeal
+        
+        localStorage.setItem("mealPlanner", JSON.stringify(storedPlanner))
+
+        if (onSave) onSave(newMeal)
         onClose()
     }
 
@@ -48,10 +57,11 @@ function AddToPlannerModal({ recipeTitle, onClose, onSave }) {
             {/* Meal type options*/}
             <div className="mb-3">
                 <label className="text-sm font-medium mb-1"> Meal Type</label>
-                <select value={mealType} onChange={(e) => setMealType(e.target.value)} className="w-full border rounded-md p-2" >
-                    <option>Breakfast</option>
-                    <option>Lunch</option>
-                    <option>Dinner</option>
+                    <select value={mealType} onChange={(e) => setMealType(e.target.value)} className="w-full border rounded-md p-2" >
+                        <option value="">Select Meal Type</option>
+                        <option value="Breakfast">Breakfast</option>
+                        <option value="Lunch">Lunch</option>
+                        <option value="Dinner">Dinner</option>
                 </select>
             </div>
 
