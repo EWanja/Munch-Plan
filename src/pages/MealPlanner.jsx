@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import  { useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
+import MealDetails from "../components/MealDetails";
 
 function MealPlanner() {
     const[currentDate, setCurrentDate] = useState(new Date())
