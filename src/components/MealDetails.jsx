@@ -37,27 +37,27 @@ function MealDetails() {
 
 
     return (
-        <div>
+        <div className="p-6">
 
-            <h2 className="">Meals for {date}</h2>
+            <h2 className="text-center text-lg font-bold mb-6">Meals for {date}</h2>
 
             {hasMeals ? (
-                <div className="">{mealTypes.map((type) => (
-                    <div key={type} className="">
-                        <h3 className="">{type}</h3>
-                        <p className="">{meals[type]?.title || "No meal added yet."}</p>
+                <div className="grid md:grid-cols-3 gap-4">{mealTypes.map((type) => (
+                    <div key={type} className="bg-gray-100 p-4 rounded-md shadow">
+                        <h3 className="font-semibold mb-2">{type}</h3>
+                        <p className="text-sm mb-3">{meals[type]?.title || "No meal added yet."}</p>
 
-                        <div className="">
-                            <button onClick={() => setSelectedMeal({ type, data: meals[type] || {} }) } className="">Edit</button>
-                            <button onClick={() => handleDelete(type)} className="">Delete</button>
+                        <div className="flex justify-between">
+                            <button onClick={() => setSelectedMeal({ type, data: meals[type] || {} }) } className="bg-[#278a1a] hover:bg-[#38c425] text-white px-4 py-2 rounded-md">Edit</button>
+                            <button onClick={() => handleDelete(type)} className="bg-[#8a301a] hover:bg-[#38c425] text-white px-4 py-2 rounded-md">Delete</button>
                         </div>
                     </div>
                 ))}
                </div>     
             ) : (
-                    <div className="">
-                        <p className="">No Meals planned for this day</p>
-                        <button onClick={() => navigate("/planner")} className="">Back to Planner</button>
+                    <div className="text-center mt -10">
+                        <p className="text-gray-600 mb-3">No Meals planned for this day</p>
+                        <button onClick={() => navigate("/planner")} className="bg-[#278a1a] hover:bg-[#38c425] text-white px-4 py-2 rounded-md">Back to Planner</button>
                     </div>
             )}
 
