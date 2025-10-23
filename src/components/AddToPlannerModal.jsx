@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function AddToPlannerModal({ recipeTitle, onClose, onSave }) {
+function AddToPlannerModal({ recipeTitle, onClose }) {
     const [mealType, setMealType] = useState("")
     const [selectedDate, setSelectedDate] = useState("")
     const [notes, setNotes] = useState("")
@@ -37,10 +37,12 @@ function AddToPlannerModal({ recipeTitle, onClose, onSave }) {
         }
 
         storedPlanner[selectedDate][mealType] = newMeal
-        
-        localStorage.setItem("mealPlanner", JSON.stringify(storedPlanner))
 
-        if (onSave) onSave(newMeal)
+         localStorage.setItem("mealPlanner", JSON.stringify(storedPlanner));
+        
+        alert(`${recipeTitle} added to ${mealType} on ${selectedDate}!`)
+
+        
         onClose()
     }
 
