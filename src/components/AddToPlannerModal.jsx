@@ -11,7 +11,8 @@ function AddToPlannerModal({ recipeTitle, onClose }) {
         const month = now.getMonth()
         const daysMonth = new Date(year, month + 1, 0).getDate()
 
-    const dates = []
+        const dates = []
+        
     for (let day = 1; day <= daysMonth; day++) {
         const date = new Date(year, month, day)
         dates.push(date.toISOString().split("T")[0])
@@ -38,7 +39,7 @@ function AddToPlannerModal({ recipeTitle, onClose }) {
 
         storedPlanner[selectedDate][mealType] = newMeal
 
-         localStorage.setItem("mealPlanner", JSON.stringify(storedPlanner));
+        localStorage.setItem("mealPlanner", JSON.stringify(storedPlanner));
         
         alert(`${recipeTitle} added to ${mealType} on ${selectedDate}!`)
 
@@ -70,13 +71,8 @@ function AddToPlannerModal({ recipeTitle, onClose }) {
             {/* Date options*/}
             <div className="mb-3">
                 <label className="text-sm font-medium mb-1">Select Date</label>
-                    <select value={selectedDate} onChange={(e) =>
-                        setSelectedDate(e.target.value)} className="w-full border rounded-md p-2">
-                        <option value="">Choose Date</option>
-                        {getCurrentMonthDates().map((date)=>(
-                            <option key={date} value={date}>{date}</option>
-                        ))}
-                </select>
+                    <input type="date" value={selectedDate} onChange={(e) =>
+                        setSelectedDate(e.target.value)} className="w-full border rounded-md p-2"/>
             </div>
             
             {/* Add Note*/}

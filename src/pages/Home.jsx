@@ -1,7 +1,12 @@
 import React from 'react'
 import Navbar from '../components/Navbar'
+import BrowseRecipes from './BrowseRecipes'
+import { useNavigate } from 'react-router-dom'
+
 
 function Home() {
+
+    const navigate = useNavigate()
 
     return (
         <div className='flex flex-col md:flex-row items-center justify-between px-6 md:px-20 py-8 bg-gradient-to-r from-green-50 to-white'>
@@ -9,7 +14,7 @@ function Home() {
                 <h1 className='text-5xl md:text-6xl font-extrabold text-gray-900 leading-tight'>Plan your meals <span className=" block text-[#278a1a] mt-2">stress-free</span>
     </h1>
                 <p className='text-gray-600 text-lg'>Discover recipes & create your weekly meal plan in minutes.</p>
-                <button className='bg-[#278a1a] hover:bg-[#38c425] text-white font-semibold px-6 py-3 rounded-md transition duration-300'>Get Started</button>
+                <button onClick={() => navigate('/recipes')} className='bg-[#278a1a] hover:bg-[#38c425] text-white font-semibold px-6 py-3 rounded-md transition duration-300'>Get Started</button>
             </div>
             
             
