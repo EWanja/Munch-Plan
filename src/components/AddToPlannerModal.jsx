@@ -5,21 +5,6 @@ function AddToPlannerModal({ recipeTitle, onClose }) {
     const [selectedDate, setSelectedDate] = useState("")
     const [notes, setNotes] = useState("")
     
-    const getCurrentMonthDates = () => {
-        const now = new Date()
-        const year = now.getFullYear()
-        const month = now.getMonth()
-        const daysMonth = new Date(year, month + 1, 0).getDate()
-
-        const dates = []
-        
-    for (let day = 1; day <= daysMonth; day++) {
-        const date = new Date(year, month, day)
-        dates.push(date.toISOString().split("T")[0])
-    }
-    return dates;
-    }
-    
     const handleSave = () => {
         if (!mealType || !selectedDate) {
             alert("Please select meal type and date")
@@ -33,7 +18,7 @@ function AddToPlannerModal({ recipeTitle, onClose }) {
 
         const storedPlanner = JSON.parse(localStorage.getItem("mealPlanner")) || {}
 
-        if (!storedPlanner[selectedDate] || typeof storedPlanner[selectedDate] !== "object") {
+        if (!storedPlanner[selectedDate]) {
             storedPlanner[selectedDate] = {}
         }
 

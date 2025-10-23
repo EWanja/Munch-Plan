@@ -10,7 +10,6 @@ function BrowseRecipes() {
   const [cuisine, setCuisine] = useState("")
   const [diet, setDiet] = useState("")
   const [intolerance, setIntolerance] = useState("")
-  const [selectedRecipes, setselectedRecipes] = useState("")
 
   useEffect(() => {
     const loadRecipes = async () => {
@@ -81,7 +80,7 @@ function BrowseRecipes() {
           <option value="gluten">Gluten</option>
           </select>
 
-          <button type ="submit" className="bg-[#278a1a] hover:bg-[#38c425] text-white font-semibold px-6 py-3 rounded-md transition duration-300'"> Search</button>
+          <button type ="submit" className="bg-[#278a1a] hover:bg-[#38c425] text-white font-semibold px-6 py-3 rounded-md transition duration-300"> Search</button>
         </form>
         
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
@@ -97,18 +96,18 @@ function BrowseRecipes() {
             />
             <h3 className="font-semibold text-lg">{recipe.title}</h3>
 
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between px-4 mt-3">
               <p className="text-sm text-gray-600 mt-2">
                 Ready in {recipe.readyInMinutes} minutes | {recipe.servings} servings
               </p>
-              <div className="flex justify-end mt-auto px-4 mb-4">
+          
               <Link
                 to={`/recipe/${recipe.id}`}
                 className="bg-[#278a1a] hover:bg-[#38c425] text-white px-4 py-2 rounded-md text-sm text-center transition"
               >
                 View
-                </Link>
-                </div>
+              </Link>
+              
             </div>
           </div>
         ))}

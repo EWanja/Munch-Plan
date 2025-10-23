@@ -35,9 +35,6 @@ function RecipeDetails(){
     alert(`${meal.title} added to ${mealType} on ${date}`)
   }
 
-
-
-
   if (loading) return <p>Loading recipe...</p>
   if(!recipe) return <p>Recipe not Found</p>
 
