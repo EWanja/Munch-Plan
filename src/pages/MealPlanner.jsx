@@ -41,7 +41,7 @@ function MealPlanner() {
         <button onClick={() => changeMonth(1)} className="bg-gray-200 px-3 py-1 rounded-md">
           {">"}</button>
             </div>
-          <div className="grid grid-cols-7 gap-2">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-7 gap-2">
           {Array.from({ length: daysInMonth }, (_, i) => {
             const date = formatDate(i + 1);
             const hasMeals = meals[date];
@@ -53,7 +53,7 @@ function MealPlanner() {
               >
                 <span className="font-semibold">{i + 1}</span>
                 {hasMeals ? (
-                  <p className="text-xs text:[#278a1a] space-y-1">
+                  <p className=" flex flex-wrap gap-1 text-[10px]  sm:text-xs text:[#278a1a]">
                     {Object.keys(hasMeals).map((mealType) => (
                       <span key={mealType}className="px-2 py-0.5 rounded-md">
                         {mealType}
