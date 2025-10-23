@@ -53,8 +53,12 @@ function MealPlanner() {
               >
                 <span className="font-semibold">{i + 1}</span>
                 {hasMeals ? (
-                  <p className="text-xs text:[#278a1a]">
-                    {Object.values(hasMeals)[0].title}
+                  <p className="text-xs text:[#278a1a] space-y-1">
+                    {Object.keys(hasMeals).map((mealType) => (
+                      <span key={mealType}className="px-2 py-0.5 rounded-md">
+                        {mealType}
+                      </span>
+                    ))}
                   </p>
                 ) : (
                   <p className="text-xs text-gray-400"> + </p>
